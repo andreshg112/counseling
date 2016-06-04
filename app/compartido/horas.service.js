@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-            .module('gasolinaApp')
+            .module('app')
             .service('HorasService', HorasService);
 
     HorasService.$inject = [];

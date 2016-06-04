@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('gasolinaApp')
+        .module('app')
         .controller('IndexController', IndexController);
 
     IndexController.$inject = ['$location'];

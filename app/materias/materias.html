@@ -1,0 +1,87 @@
+<form class="form-horizontal" role="form" ng-submit="materiasVm.guardar()">
+    <div id="fila-1" class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <center>
+                        <h2>Gestión de materias</h2>Asesorias UPC
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="fila-4" class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">Registrar materia</div>
+                <div class="panel-body">
+                    <div id="fila-1" class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Nombre:</label>
+                                <div class="col-sm-10">
+                                    <input id="nombre" class="form-control" type="text" ng-model="materiasVm.materia.nombre" required="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="fila-2" class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Código:</label>
+                                <div class="col-sm-8">
+                                    <input id="codigo" class="form-control" type="text" ng-model="materiasVm.materia.codigo" required="" minlength="5" maxlength="7">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Créditos:</label>
+                                <div class="col-sm-8">
+                                    <select id="creditos" ng-model="materiasVm.materia.creditos" ng-options="credito for credito in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]"
+                                        class="form-control" required>
+                                        <option selected value>Seleccione la cantidad de créditos</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <center id="fila-3">
+                        <input type="submit" class="btn btn-success" value="Guardar" /> &emsp;
+                        <input type="button" class="btn btn-danger" value="Limpiar" ng-click="materiasVm.limpiar()" />
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="fila-4" class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Materias registradas
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th>Código</th>
+                                <th>Nombre</th>
+                                <th>Créditos</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            <tr ng-repeat="materia in materiasVm.materias| filter:{'codigo': materiasVm.materia.codigo} track by $index">
+                                <td>{{$index + 1}}</td>
+                                <td>{{materia.codigo}}</td>
+                                <td>{{materia.nombre}}</td>
+                                <td>{{materia.creditos}}</td>
+                                <td><a ng-click="materiasVm.eliminar(materia)" href="javascript:;">Eliminar</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

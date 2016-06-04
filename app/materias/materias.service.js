@@ -2,18 +2,18 @@
     'use strict';
 
     angular
-            .module('gasolinaApp')
-            .service('AsignacionesService', AsignacionesService);
+        .module('app')
+        .service('MateriasService', MateriasService);
 
-    AsignacionesService.$inject = ['$http'];
-    function AsignacionesService($http) {
+    MateriasService.$inject = ['$http'];
+    function MateriasService($http) {
         this.getAll = getAll;
         this.delete = dispose;
         this.post = post;
 
         ////////////////
 
-        var uri = "http://localhost/assign-classroom-server/reservas";
+        var uri = "api/public/materias";
 
         function getAll() {
             console.log("get_all");
