@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('materias', 'MateriasController', ['except' => ['create', 'edit']]);
+Route::resource('tutores', 'TutoresController', ['except' => ['create', 'edit']]);

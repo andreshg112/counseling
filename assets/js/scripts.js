@@ -1,12 +1,12 @@
-$(document).on("focus", "#datepicker", function () {
+$(document).on("focus", "#datepicker", function() {
     $('#datepicker').datepicker({
         dateFormat: 'yy-mm-dd',
     });
 });
-$(document).on("focus", ".timepicker", function () {
+$(document).on("focus", ".timepicker", function() {
     $('input.timepicker').timepicker({
         timeFormat: 'HH:mm:ss',
-//        defaultTime: 'now',
+        //        defaultTime: 'now',
         minTime: '06:00:00',
         maxTime: '21:00:00',
         startTime: '06:00:00',
@@ -15,7 +15,14 @@ $(document).on("focus", ".timepicker", function () {
     });
 });
 
-//Función range(), similar a la de Python. Retorna un array, recibiendo su inicio, final (no incluyente) y paso
+/**
+ * Función range(), similar a la de Python. Retorna un array, recibiendo su inicio, final (no incluyente) y paso.
+ * 
+ * @param start Inicio
+ * @param stop Final (no incluyente)
+ * @param step Paso
+ * @returns array
+ */
 function range(start, stop, step) {
     if (typeof stop == 'undefined') {
         // one param defined
@@ -37,5 +44,4 @@ function range(start, stop, step) {
     }
 
     return result;
-}
-;
+};

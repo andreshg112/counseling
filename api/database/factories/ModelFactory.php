@@ -20,10 +20,19 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Materia::class, function (Faker\Generator $faker) {
+$factory->define(App\Models\Materia::class, function (Faker\Generator $faker) {
     return [
     'codigo' => strtoupper($faker->bothify('??###')),
     'nombre' => $faker->catchPhrase,
     'creditos' => $faker->numberBetween($min = 1, $max = 20)
+    ];
+});
+
+$factory->define(App\Models\Tutor::class, function (Faker\Generator $faker) {
+    return [
+    'primer_nombre' => $faker->firstName,
+    'segundo_nombre' => $faker->firstName,
+    'primer_apellido' => $faker->lastName,
+    'segundo_apellido' => $faker->lastName
     ];
 });
