@@ -21,6 +21,11 @@
                         controller: 'TutoresController',
                         controllerAs: 'tutoresVm'
                     })
+                    .when('/horarios', {
+                        templateUrl: 'app/horarios/horarios.html',
+                        controller: 'HorariosController',
+                        controllerAs: 'horariosVm'
+                    })
                     .otherwise({
                         redirectTo: '/'
                     });

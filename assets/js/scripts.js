@@ -3,6 +3,7 @@ $(document).on("focus", "#datepicker", function() {
         dateFormat: 'yy-mm-dd',
     });
 });
+
 $(document).on("focus", ".timepicker", function() {
     $('input.timepicker').timepicker({
         timeFormat: 'HH:mm:ss',
@@ -14,6 +15,12 @@ $(document).on("focus", ".timepicker", function() {
         scrollbar: true
     });
 });
+
+String.prototype.capitalize = function() {
+    return this.replace(/(?:^|\s)\S/g, function(a) {
+        return a.toUpperCase();
+    });
+};
 
 /**
  * Función range(), similar a la de Python. Retorna un array, recibiendo su inicio, final (no incluyente) y paso.

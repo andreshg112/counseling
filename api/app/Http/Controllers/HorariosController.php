@@ -30,7 +30,7 @@ class HorariosController extends Controller
     
     public function index()
     {
-        return Horario::all();
+        return Horario::with('materia', 'tutor')->get();
     }
     
     public function store(Request $request)
@@ -51,6 +51,7 @@ class HorariosController extends Controller
             
             try {
                 // Ejecutamos el validador y en caso de que falle devolvemos la respuesta
+                //$request->all()['dia'] = strtolower($request->all()['dia']); 
                 $validator = \Validator::make($request->all(), $rules);
                 if ($validator->fails()) {
                     $respuesta['result'] = false;
