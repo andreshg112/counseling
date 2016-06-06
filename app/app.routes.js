@@ -11,6 +11,11 @@
                         controller: 'MateriasController',
                         controllerAs: 'materiasVm'
                     })
+                    .when('/login', {
+                        templateUrl: 'app/login/login.html',
+                        controller: 'LoginController',
+                        controllerAs: 'loginVm'
+                    })
                     .when('/materias', {
                         templateUrl: 'app/materias/materias.html',
                         controller: 'MateriasController',

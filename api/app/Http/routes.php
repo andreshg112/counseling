@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::resource('materias', 'MateriasController', ['except' => ['create', 'edit']]);
-Route::resource('tutores', 'TutoresController', ['except' => ['create', 'edit']]);
-Route::resource('horarios', 'HorariosController', ['except' => ['create', 'edit']]);
+Route::group(['middleware' => 'cors'], function() {
+    Route::resource('materias', 'MateriasController', ['except' => ['create', 'edit']]);
+    Route::resource('tutores', 'TutoresController', ['except' => ['create', 'edit']]);
+    Route::resource('horarios', 'HorariosController', ['except' => ['create', 'edit']]);
+    Route::post('login', 'UsersController@login');
+});

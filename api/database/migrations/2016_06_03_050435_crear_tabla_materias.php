@@ -14,7 +14,7 @@ class CrearTablaMaterias extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo', 5)->unique();
+            $table->string('codigo', 7)->unique();
             $table->string('nombre');
             $table->integer('creditos');
             $table->timestamps();

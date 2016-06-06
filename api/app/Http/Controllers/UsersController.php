@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Models\Horario;
+use App\Models\User;
 use \stdClass;
 
-class HorariosController extends Controller
+class UsersController extends Controller
 {
     
     public function destroy($id)
@@ -124,4 +124,39 @@ class HorariosController extends Controller
         return Horario::findOrFail($id);
     }
     
+    public function login(Request $request)
+    {
+        $rules = [
+        'email'      => 'required|string',
+        'password'  => 'required|string',
+        ];
+        try {
+            $validator = \Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                $respuesta['result'] = false;
+                $respuesta['validator'] = $validator->errors()->all();
+                $respuesta['mensaje'] = '¡Error!';
+            } else {
+                $recibido = $request->all();
+                $instancia = User::where('email', $recibido['email'])->first();
+                $respuesta = [];
+                if ($instancia) {
+                    if ($instancia->password == $recibido['password']) {
+                        $respuesta['result'] = $instancia;
+                        $respuesta['mensaje'] = "¡Bienvenido(a) ".$instancia->primer_nombre."!";
+                    } else {
+                        $respuesta['result'] = false;
+                        $respuesta['mensaje'] = "Contraseña incorrecta.";
+                    }
+                } else {
+                    $respuesta['result'] = false;
+                    $respuesta['mensaje'] = "El email ingresado no se encuentra registrado.";
+                }
+            }
+        } catch (Exception $e) {
+            $respuesta['result'] = false;
+            $respuesta['mensaje'] = "Error: ".$e;
+        }
+        return $respuesta;
+    }
 }

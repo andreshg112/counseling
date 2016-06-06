@@ -15,8 +15,8 @@ class MateriasController extends Controller
         $instancia = Materia::find($id);
         $respuesta = new stdClass();
         if ($instancia) {
-            $respuesta->result = $instancia->delete();
-            if ($instancia->trashed()) {
+            $respuesta->result = $instancia->forceDelete();
+            if ($respuesta->result) {
                 $respuesta->mensaje = "Eliminado correctamente.";
                 $respuesta->eliminado = $instancia;
             } else {
