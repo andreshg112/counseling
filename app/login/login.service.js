@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .service('HorariosService', HorariosService);
+        .service('LoginService', LoginService);
 
-    HorariosService.$inject = ['$http'];
+    LoginService.$inject = ['$http'];
 
-    function HorariosService($http) {
+    function LoginService($http) {
         this.getAll = getAll;
         this.delete = dispose;
         this.post = post;
@@ -15,7 +15,7 @@
 
         ////////////////
 
-        var uri = "api/public/horarios";
+        var uri = "api/public/login";
 
         function getAll() {
             console.log("get_all");
