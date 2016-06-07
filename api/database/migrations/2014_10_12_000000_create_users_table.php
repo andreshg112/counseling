@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('primer_apellido', 15);
             $table->string('segundo_apellido', 15)->nullable();
             $table->enum('genero', ['masculino', 'femenino', 'otro']);
-            $table->enum('tipo_usuario', ['administrador', 'tutor', 'alumno']);
+            $table->enum('tipo_usuario', ['administrador', 'tutor', 'alumno'])->default('alumno');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

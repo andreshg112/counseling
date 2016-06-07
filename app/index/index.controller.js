@@ -6,45 +6,20 @@
         .controller('IndexController', IndexController);
 
     IndexController.$inject = ['$location'];
+
     function IndexController($location) {
         console.log("Entró a IndexController");
         var vm = this;
+        var options = {
+            namespace: 'counseling',
+            storage: 'session'
+        };
+        var basil = new window.Basil(options);
 
-        //Variables para manipular la clase 'active' de los enlaces del navbar. Es decir, cuál vista está seleccionada.
-        vm.verRegistrar = false;
-        vm.verConsultar = false;
-        vm.verAcerca = true;
-
-        vm.activeRegistrar = function() {
-            //Si se hizo clic en Registrar, desactivar los demás.
-            //Esto hará que el link Registrar tome la clase 'active' y su color sea más claro. 
-            vm.verRegistrar = true;
-            vm.verAcerca = false;
-            vm.verConsultar = false;
-        };
-        vm.activeConsultar = function() {
-            vm.verConsultar = true;
-            vm.verRegistrar = false;
-            vm.verAcerca = false;
-        };
-        vm.activeAcerca = function() {
-            vm.verAcerca = true;
-            vm.verRegistrar = false;
-            vm.verConsultar = false;
-        };
-        //Verificar en cuál ruta está, en caso de recargar la página.
-        if ($location.path() == '/registrar/') {
-            vm.activeRegistrar();
-        } else if ($location.path() == '/consultar/') {
-            vm.activeConsultar();
-        } else if ($location.path() == '/acerca/') {
-            vm.activeAcerca();
+        console.log(basil.get('user'), basil.get('user') == null);
+        if (basil.get('user') == null) {
+            location.href = 'login.html';
         }
-        //Fin
-
-        vm.mostrar = function(dato) {
-            console.log(dato);
-        };
 
     }
 })();

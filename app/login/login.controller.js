@@ -5,30 +5,36 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['LoginService'];
+    LoginController.$inject = ['UsersService'];
 
-    function LoginController(LoginService) {
+    function LoginController(UsersService) {
         console.log("Entró a LoginController");
         var vm = this;
-
+        var options = {
+            namespace: 'counseling',
+            storage: 'session'
+        };
+        var basil = new window.Basil(options);
         //Declaraciones de variables públicas en orden alfabético.
         vm.iniciarSesion = iniciarSesion;
         vm.limpiar = limpiar;
+        vm.registrarse = registrarse;
+        vm.roles = ['alumno', 'tutor'];
 
         //Funciones, en orden alfabético
         function activate() {
             vm.limpiar();
         }
 
-        function guardar() {
-            vm.horario.hora_inicio = $('#hora_inicio').val();
-            vm.horario.hora_fin = $('#hora_fin').val();
-            console.log(vm.horario);
-            LoginService.post(vm.horario).then(function(response) {
+        function registrarse() {
+            UsersService.post(vm.usuarioRegistro).then(function(response) {
                     console.log(response);
                     if (response.data.result) {
+                        basil.set('user', response.data.result);
                         alertify.success(response.data.mensaje);
-                        activate();
+                        alertify.success("Serás redirigido(a) al menú principal.", 4, function() {
+                            location.href = '/counseling';
+                        });
                     } else if (response.data.validator) {
                         alertify.error(response.data.mensaje);
                         response.data.validator.forEach(function(element) {
@@ -46,11 +52,12 @@
         }
 
         function iniciarSesion() {
-            LoginService.post(vm.usuarioInicioSesion).then(function(response) {
+            UsersService.login(vm.usuarioInicioSesion).then(function(response) {
                     console.log(response);
                     if (response.data.result) {
+                        basil.set('user', response.data.result);
                         alertify.success(response.data.mensaje);
-                        alertify.success("Serás redirigido al menú principal.", 4, function() {
+                        alertify.success("Serás redirigido(a) al menú principal.", 4, function() {
                             location.href = '/counseling';
                         });
                     } else if (response.data.validator) {

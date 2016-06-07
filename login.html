@@ -64,27 +64,29 @@
                                         </div>
                                     </div>
                                 </form>
-                                <form id="register-form" action="" method="post" role="form" style="display: none;">
+                                <form id="register-form" ng-submit="login.registrarse()" role="form" style="display: none;">
                                     <div class="form-group">
-                                        <input type="text" name="primer_nombre" id="primer_nombre" class="form-control" placeholder="Primer nombre" value="" required>
+                                        <input type="text" name="primer_nombre" id="primer_nombre" ng-model="login.usuarioRegistro.primer_nombre" class="form-control" placeholder="Primer nombre" value="" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="segundo_nombre" id="segundo_nombre" class="form-control" placeholder="Segundo nombre" value="">
+                                        <input type="text" name="segundo_nombre" id="segundo_nombre" ng-model="login.usuarioRegistro.segundo_nombre" class="form-control" placeholder="Segundo nombre" value="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="primer_apellido" id="primer_apellido" class="form-control" placeholder="Primer apellido" value="" required>
+                                        <input type="text" name="primer_apellido" id="primer_apellido" ng-model="login.usuarioRegistro.primer_apellido" class="form-control" placeholder="Primer apellido" value="" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" name="segundo_apellido" id="segundo_apellido" class="form-control" placeholder="Segundo apellido" value="">
+                                        <input type="text" name="segundo_apellido" id="segundo_apellido" ng-model="login.usuarioRegistro.segundo_apellido" class="form-control" placeholder="Segundo apellido" value="">
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email" value="" required>
+                                        <select name="tipo_usuario" id="tipo_usuario" class="form-control" ng-model="login.usuarioRegistro.tipo_usuario" ng-options="rol as rol.capitalize() for rol in login.roles" required>
+                                            <option selected value>Seleccione un rol</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
+                                        <input type="email" name="email" id="email" ng-model="login.usuarioRegistro.email" class="form-control" placeholder="Email" value="" required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirmar contraseña">
+                                        <input type="password" name="password" id="password" ng-model="login.usuarioRegistro.password" class="form-control" placeholder="Contraseña" required>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
@@ -105,11 +107,15 @@
     <script src="assets/libs/bootstrap/bootstrap.min.js"></script>
     <script src="assets/libs/alertify/alertify.min.js"></script>
     <script src="assets/libs/alertify/alertify-defaults.js" type="text/javascript"></script>
+    <script src="assets/libs/basil/basil.min.js"></script>
+    <script src="assets/libs/basil/basil.list.js"></script>
+    <script src="assets/libs/basil/basil.set.js"></script>
     <script src="assets/js/login.js"></script>
+    <script src="assets/js/scripts.js"></script>
     <script src="assets/libs/angular/angular.min.js"></script>
     <script src="assets/libs/angular/angular-route.min.js"></script>
     <script src="app/app.module.js"></script>
-    <script src="app/login/login.service.js"></script>
+    <script src="app/compartido/users.service.js"></script>
     <script src="app/login/login.controller.js"></script>
 </body>
 

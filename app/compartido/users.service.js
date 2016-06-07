@@ -3,19 +3,26 @@
 
     angular
         .module('app')
-        .service('LoginService', LoginService);
+        .service('UsersService', UsersService);
 
-    LoginService.$inject = ['$http'];
+    UsersService.$inject = ['$http'];
 
-    function LoginService($http) {
-        this.getAll = getAll;
+    function UsersService($http) {
         this.delete = dispose;
+        this.getAll = getAll;
+        this.login = login;
         this.post = post;
         this.put = put;
 
         ////////////////
 
-        var uri = "api/public/login";
+        var uri = "api/public/users";
+
+        function dispose(registro) {
+            console.log("delete");
+            var req = $http.delete(uri + "/" + registro.id);
+            return req;
+        }
 
         function getAll() {
             console.log("get_all");
@@ -23,9 +30,9 @@
             return req;
         }
 
-        function dispose(registro) {
-            console.log("delete");
-            var req = $http.delete(uri + "/" + registro.id);
+        function login(registro) {
+            console.log("login");
+            var req = $http.post("api/public/login", registro);
             return req;
         }
 
