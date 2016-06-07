@@ -50,6 +50,9 @@
                     console.log(response);
                     if (response.data.result) {
                         alertify.success(response.data.mensaje);
+                        alertify.success("Serás redirigido al menú principal.", 4, function() {
+                            location.href = '/counseling';
+                        });
                     } else if (response.data.validator) {
                         alertify.error(response.data.mensaje);
                         response.data.validator.forEach(function(element) {
