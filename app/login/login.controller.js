@@ -15,6 +15,7 @@
             storage: 'session'
         };
         var basil = new window.Basil(options);
+
         //Declaraciones de variables públicas en orden alfabético.
         vm.iniciarSesion = iniciarSesion;
         vm.limpiar = limpiar;

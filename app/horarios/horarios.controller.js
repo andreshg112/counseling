@@ -10,6 +10,11 @@
     function HorariosController(HorariosService, MateriasService, TutoresService) {
         console.log("Entró a HorariosController");
         var vm = this;
+        var options = {
+            namespace: 'counseling',
+            storage: 'session'
+        };
+        var basil = new window.Basil(options);
 
         //Declaraciones de variables públicas en orden alfabético.
         vm.dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -24,11 +29,15 @@
 
         //Funciones, en orden alfabético
         function activate() {
-            vm.estaModificando = false;
-            vm.limpiar();
-            cargarHorarios();
-            cargarMaterias();
-            cargarTutores();
+            if (basil.get('user').tipo_usuario != 'administrador') {
+                location.href = '#/';
+            } else {
+                vm.estaModificando = false;
+                vm.limpiar();
+                cargarHorarios();
+                cargarMaterias();
+                cargarTutores();
+            }
         }
 
         function activarModificar(horario) {
@@ -67,7 +76,7 @@
         function cargarTutores() {
             TutoresService.getAll()
                 .then(function(response) {
-                    vm.tutores = response.data;
+                    vm.tutores = response.data.result;
                     if (vm.tutores.length == 0) {
                         alertify.error('No se han registrado tutores.');
                     }

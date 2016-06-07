@@ -10,40 +10,13 @@ use \stdClass;
 class UsersController extends Controller
 {
     
-    public function store(Request $request)
+    public function get_tutores()
     {
         $respuesta = [];
-        if (!is_array($request->all())) {
+        $respuesta['result'] = User::where('tipo_usuario', 'tutor')->get();
+        if (count($respuesta['result']) == 0) {
             $respuesta['result'] = false;
-            $respuesta['mensaje'] = "Los datos enviados no tienen el formato correcto.";
-        } else {
-            $rules = [
-            'primer_nombre'      => 'required|string',
-            'primer_apellido'  => 'required|string',
-            'tipo_usuario'  => 'required|string|in:tutor,alumno',
-            'email'  => 'required|email|unique:users',
-            'password'  => 'required|string'
-            ];
-            try {
-                $validator = \Validator::make($request->all(), $rules);
-                if ($validator->fails()) {
-                    $respuesta['result'] = false;
-                    $respuesta['validator'] = $validator->errors()->all();
-                    $respuesta['mensaje'] = "¡Error!";
-                } else {
-                    $instancia = new User($request->all());
-                    $respuesta['result'] = $instancia->save();
-                    if ($respuesta['result']) {
-                        $respuesta['mensaje'] = "Registrado correctamente.";
-                        $respuesta['result'] = $instancia;
-                    } else {
-                        $respuesta['mensaje'] = "No se pudo registrar.";
-                    }
-                }
-            } catch (Exception $e) {
-                $respuesta['result'] = false;
-                $respuesta['mensaje'] = "Error:".$e;
-            }
+            $respuesta['mensaje'] = "No hay registros.";
         }
         return $respuesta;
     }
@@ -83,4 +56,43 @@ class UsersController extends Controller
         }
         return $respuesta;
     }
+    
+    public function store(Request $request)
+    {
+        $respuesta = [];
+        if (!is_array($request->all())) {
+            $respuesta['result'] = false;
+            $respuesta['mensaje'] = "Los datos enviados no tienen el formato correcto.";
+        } else {
+            $rules = [
+            'primer_nombre'      => 'required|string',
+            'primer_apellido'  => 'required|string',
+            'tipo_usuario'  => 'required|string|in:tutor,alumno',
+            'email'  => 'required|email|unique:users',
+            'password'  => 'required|string'
+            ];
+            try {
+                $validator = \Validator::make($request->all(), $rules);
+                if ($validator->fails()) {
+                    $respuesta['result'] = false;
+                    $respuesta['validator'] = $validator->errors()->all();
+                    $respuesta['mensaje'] = "¡Error!";
+                } else {
+                    $instancia = new User($request->all());
+                    $respuesta['result'] = $instancia->save();
+                    if ($respuesta['result']) {
+                        $respuesta['mensaje'] = "Registrado correctamente.";
+                        $respuesta['result'] = $instancia;
+                    } else {
+                        $respuesta['mensaje'] = "No se pudo registrar.";
+                    }
+                }
+            } catch (Exception $e) {
+                $respuesta['result'] = false;
+                $respuesta['mensaje'] = "Error:".$e;
+            }
+        }
+        return $respuesta;
+    }
+    
 }

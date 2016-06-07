@@ -29,10 +29,9 @@
                 <a class="navbar-brand" href="https://www.unicesar.edu.co/" target="_blank">Universidad Popular del Cesar</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'administrador'">
                     <!--<li ng-click="index.activeRegistrar();" ng-class="index.verRegistrar ? 'active' : ''"><a href="#/registrar/">Registrar</a></li>-->
                     <li><a href="#/materias">Materias</a></li>
-                    <li><a href="#/tutores">Tutores</a></li>
                     <li><a href="#/horarios">Horarios</a></li>
                 </ul>
             </div>
@@ -65,11 +64,10 @@
     <script src="app/app.module.js"></script>
     <script src="app/app.routes.js"></script>
     <script src="app/materias/materias.service.js"></script>
-    <script src="app/tutores/tutores.service.js"></script>
+    <script src="app/gestion-tutores/tutores.service.js"></script>
     <script src="app/horarios/horarios.service.js"></script>
     <script src="app/index/index.controller.js"></script>
     <script src="app/materias/materias.controller.js"></script>
-    <script src="app/tutores/tutores.controller.js"></script>
     <script src="app/horarios/horarios.controller.js"></script>
 </body>
 

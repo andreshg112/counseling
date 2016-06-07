@@ -10,6 +10,11 @@
     function MateriasController(MateriasService) {
         console.log("Entró a MateriasController");
         var vm = this;
+        var options = {
+            namespace: 'counseling',
+            storage: 'session'
+        };
+        var basil = new window.Basil(options);
 
         //Declaraciones de variables públicas en orden alfabético.
         vm.materias = [];
@@ -19,8 +24,12 @@
 
         //Funciones, en orden alfabético
         function activate() {
-            vm.limpiar();
-            cargarMaterias();
+            if (basil.get('user').tipo_usuario != 'administrador') {
+                location.href = '#/';
+            } else {
+                vm.limpiar();
+                cargarMaterias();
+            }
         }
 
         function cargarMaterias() {

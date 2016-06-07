@@ -21,7 +21,7 @@ class CreateHorariosTable extends Migration
             ->onUpdate('cascade');
             $table->integer('tutor_id')->unsigned();
             $table->foreign('tutor_id')
-            ->references('id')->on('tutores')
+            ->references('id')->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->enum('dia', ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']);
