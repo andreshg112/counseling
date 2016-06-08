@@ -12,22 +12,30 @@
         var vm = this;
         var options = {
             namespace: 'counseling',
-            storage: 'session'
+            storages: ['session']
         };
         var basil = new window.Basil(options);
 
+        vm.cerrarSesion = cerrarSesion;
         vm.getNombreCompletoUser = getNombreCompletoUser;
         vm.getTipoUsuario = getTipoUsuario;
-        vm.user = basil.get('user');
+        vm.user = {};
 
         function activate() {
             if (basil.get('user') == null) {
                 location.href = 'login.html';
+            } else {
+                vm.user = basil.get('user');
             }
         }
 
+        function cerrarSesion() {
+            basil.remove('user');
+            location.href = 'login.html';
+        }
+
         function getTipoUsuario() {
-            return basil.get('user').tipo_usuario;
+            return vm.user.tipo_usuario;
         }
 
         function getNombreCompletoUser() {

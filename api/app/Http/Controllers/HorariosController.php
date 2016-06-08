@@ -87,7 +87,7 @@ class HorariosController extends Controller
                 $instancia->fill($request->all());
                 $rules = [
                 'materia_id'      => 'required|exists:materias,id',
-                'tutor_id'  => 'required|exists:tutores,id',
+                'tutor_id'  => 'required|exists:users,id,tipo_usuario,tutor',
                 'dia'  => 'required|in:lunes,martes,miércoles,jueves,viernes,sábado',
                 'hora_inicio'  => 'required',
                 'hora_fin'  => 'required'

@@ -12,7 +12,7 @@
         var vm = this;
         var options = {
             namespace: 'counseling',
-            storage: 'session'
+            storages: ['session']
         };
         var basil = new window.Basil(options);
 
