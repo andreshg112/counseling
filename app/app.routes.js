@@ -24,6 +24,11 @@
                         controller: 'BuscarHorariosController',
                         controllerAs: 'horariosVm'
                     })
+                    .when('/visualizar-usuarios', {
+                        templateUrl: 'app/visualizar-usuarios/visualizar-usuarios.html',
+                        controller: 'VisualizarUsuariosController',
+                        controllerAs: 'vm'
+                    })
                     .otherwise({
                         redirectTo: '/'
                     });

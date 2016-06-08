@@ -18,6 +18,6 @@ Route::group(['middleware' => 'cors'], function() {
     Route::resource('materias', 'MateriasController', ['except' => ['create', 'edit']]);
     Route::get('tutores', 'UsersController@get_tutores');
     Route::resource('horarios', 'HorariosController', ['except' => ['create', 'edit']]);
-    Route::resource('users', 'UsersController', ['only' => ['store']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'store']]);
     Route::post('login', 'UsersController@login');
 });

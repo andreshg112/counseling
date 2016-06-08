@@ -32,6 +32,7 @@
                 <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'administrador'">
                     <li><a href="#/materias">Materias</a></li>
                     <li><a href="#/horarios">Horarios</a></li>
+                    <li><a href="#/visualizar-usuarios">Visualizar usuarios</a></li>
                 </ul>
                 <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'tutor'">
                     <li><a href="#/">Tutor 1</a></li>
@@ -79,12 +80,14 @@
     <script src="app/app.module.js"></script>
     <script src="app/app.routes.js"></script>
     <script src="app/materias/materias.service.js"></script>
-    <script src="app/gestion-tutores/tutores.service.js"></script>
     <script src="app/horarios/horarios.service.js"></script>
+    <script src="app/compartido/tutores.service.js"></script>
+    <script src="app/compartido/users.service.js"></script>
     <script src="app/index/index.controller.js"></script>
     <script src="app/materias/materias.controller.js"></script>
     <script src="app/horarios/horarios.controller.js"></script>
     <script src="app/buscar-horarios/buscar-horarios.controller.js"></script>
+    <script src="app/visualizar-usuarios/visualizar-usuarios.controller.js"></script>
 </body>
 
 </html>

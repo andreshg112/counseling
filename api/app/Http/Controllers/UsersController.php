@@ -21,6 +21,17 @@ class UsersController extends Controller
         return $respuesta;
     }
     
+    public function index()
+    {
+        $respuesta = [];
+        $respuesta['result'] = User::where('tipo_usuario', '!=', 'administrador')->get();
+        if (count($respuesta['result']) == 0) {
+            $respuesta['result'] = false;
+            $respuesta['mensaje'] = "No hay registros.";
+        }
+        return $respuesta;
+    }
+    
     public function login(Request $request)
     {
         $rules = [

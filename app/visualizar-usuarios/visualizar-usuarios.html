@@ -1,10 +1,10 @@
-<form class="form-horizontal" role="form" ng-submit="tutoresVm.guardar()">
+<form class="form-horizontal" role="form" ng-submit="materiasVm.guardar()">
     <div id="fila-1" class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <center>
-                        <h2>Gestión de tutores</h2>Asesorías UPC
+                        <h2>Visualizar usuarios</h2>Asesorías UPC
                     </center>
                 </div>
             </div>
@@ -13,14 +13,14 @@
     <div id="fila-2" class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Registrar tutor</div>
+                <div class="panel-heading">Filtrar usuario</div>
                 <div class="panel-body">
                     <div id="fila-2-1" class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="control-label col-sm-4">Primer nombre:</label>
                                 <div class="col-sm-8">
-                                    <input id="primer_nombre" class="form-control" type="text" ng-model="tutoresVm.tutor.primer_nombre" required="">
+                                    <input id="primer_nombre" class="form-control" type="text" ng-model="vm.usuario.primer_nombre" required="">
                                 </div>
                             </div>
                         </div>
@@ -28,7 +28,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">Segundo nombre:</label>
                                 <div class="col-sm-8">
-                                    <input id="segundo_nombre" class="form-control" type="text" ng-model="tutoresVm.tutor.segundo_nombre">
+                                    <input id="segundo_nombre" class="form-control" type="text" ng-model="vm.usuario.segundo_nombre">
                                 </div>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">Primer apellido:</label>
                                 <div class="col-sm-8">
-                                    <input id="primer_apellido" class="form-control" type="text" ng-model="tutoresVm.tutor.primer_apellido" required="">
+                                    <input id="primer_apellido" class="form-control" type="text" ng-model="vm.usuario.primer_apellido" required="">
                                 </div>
                             </div>
                         </div>
@@ -46,25 +46,35 @@
                             <div class="form-group">
                                 <label class="control-label col-sm-4">Segundo apellido:</label>
                                 <div class="col-sm-8">
-                                    <input id="segundo_apellido" class="form-control" type="text" ng-model="tutoresVm.tutor.segundo_apellido">
+                                    <input id="segundo_apellido" class="form-control" type="text" ng-model="vm.usuario.segundo_apellido">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <center id="fila-2-3">
-                        <input type="submit" class="btn btn-success" value="Guardar" /> &emsp;
-                        <input type="button" class="btn btn-danger" value="Limpiar" ng-click="tutoresVm.limpiar()" />
+                    <div id="fila-2-3" class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Tipo de usuario:</label>
+                                <div class="col-sm-8">
+                                    <select name="tipo_usuario" id="tipo_usuario" class="form-control" ng-model="vm.usuario.tipo_usuario" ng-options="rol as rol.capitalize() for rol in vm.roles" required>
+                                            <option selected value>Seleccione un rol</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <center id="fila-2-4">
+                        <input type="button" class="btn btn-danger" value="Limpiar" ng-click="vm.limpiar()" />
                     </center>
                 </div>
             </div>
         </div>
     </div>
-    <br>
     <div id="fila-3" class="row">
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Tutores registrados
+                    Usuarios registrados
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -75,15 +85,15 @@
                                 <th>Segundo nombre</th>
                                 <th>Primer apellido</th>
                                 <th>Segundo apellido</th>
-                                <th>&nbsp;</th>
+                                <th>Tipo de usuario</th>
                             </tr>
-                            <tr ng-repeat="tutor in tutoresVm.tutores track by $index">
+                            <tr ng-repeat="usuario in vm.usuarios | filter:vm.usuario track by $index">
                                 <td>{{$index + 1}}</td>
-                                <td>{{tutor.primer_nombre}}</td>
-                                <td>{{tutor.segundo_nombre}}</td>
-                                <td>{{tutor.primer_apellido}}</td>
-                                <td>{{tutor.segundo_apellido}}</td>
-                                <td><a ng-click="tutoresVm.eliminar(tutor)" href="javascript:;">Eliminar</a></td>
+                                <td>{{usuario.primer_nombre}}</td>
+                                <td>{{usuario.segundo_nombre}}</td>
+                                <td>{{usuario.primer_apellido}}</td>
+                                <td>{{usuario.segundo_apellido}}</td>
+                                <td>{{usuario.tipo_usuario.capitalize()}}</td>
                             </tr>
                         </table>
                     </div>
