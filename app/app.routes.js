@@ -19,6 +19,11 @@
                         controller: 'HorariosController',
                         controllerAs: 'horariosVm'
                     })
+                    .when('/buscar-horarios', {
+                        templateUrl: 'app/buscar-horarios/buscar-horarios.html',
+                        controller: 'BuscarHorariosController',
+                        controllerAs: 'horariosVm'
+                    })
                     .otherwise({
                         redirectTo: '/'
                     });

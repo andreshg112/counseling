@@ -38,13 +38,13 @@
                     <li><a href="#/">Tutor 2</a></li>
                 </ul>
                 <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'alumno'">
-                    <li><a href="#/">Alumno 1</a></li>
-                    <li><a href="#/">Alumno 2</a></li>
+                    <li><a href="#/buscar-horarios">Buscar horarios</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{index.getNombreCompletoUser()}} <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
+                            <li><a href="#/">Inicio</a></li>
                             <li><a href="javascript:;" ng-click="index.cerrarSesion()">Cerrar sesión</a></li>
                         </ul>
                     </li>
@@ -84,6 +84,7 @@
     <script src="app/index/index.controller.js"></script>
     <script src="app/materias/materias.controller.js"></script>
     <script src="app/horarios/horarios.controller.js"></script>
+    <script src="app/buscar-horarios/buscar-horarios.controller.js"></script>
 </body>
 
 </html>
