@@ -24,7 +24,7 @@ class UsersController extends Controller
     public function index()
     {
         $respuesta = [];
-        $respuesta['result'] = User::where('tipo_usuario', '!=', 'administrador')->get();
+        $respuesta['result'] = User::where('tipo_usuario', '!=', 'administrador')->with('programa')->get();
         if (count($respuesta['result']) == 0) {
             $respuesta['result'] = false;
             $respuesta['mensaje'] = "No hay registros.";
@@ -76,9 +76,12 @@ class UsersController extends Controller
             $respuesta['mensaje'] = "Los datos enviados no tienen el formato correcto.";
         } else {
             $rules = [
+            'tipo_documento'      => 'required|string||in:CC,CE,TI',
+            'numero_documento'      => 'required|unique:users|numeric',
             'primer_nombre'      => 'required|string',
             'primer_apellido'  => 'required|string',
             'tipo_usuario'  => 'required|string|in:tutor,alumno',
+            'programa_id'  => 'required|exists:programas,id',
             'email'  => 'required|email|unique:users',
             'password'  => 'required|string'
             ];

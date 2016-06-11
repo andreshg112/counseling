@@ -5,9 +5,9 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['UsersService'];
+    LoginController.$inject = ['UsersService', 'ProgramasService'];
 
-    function LoginController(UsersService) {
+    function LoginController(UsersService, ProgramasService) {
         console.log("Entró a LoginController");
         var vm = this;
         var options = {
@@ -19,12 +19,29 @@
         //Declaraciones de variables públicas en orden alfabético.
         vm.iniciarSesion = iniciarSesion;
         vm.limpiar = limpiar;
+        vm.programas = [];
         vm.registrarse = registrarse;
         vm.roles = ['alumno', 'tutor'];
+        vm.tipos_documentos = ['CC', 'CE', 'TI'];
 
         //Funciones, en orden alfabético
         function activate() {
             vm.limpiar();
+            cargarProgramas();
+        }
+
+        function cargarProgramas() {
+            ProgramasService.getAll()
+                .then(function(response) {
+                    vm.programas = response.data.result;
+                    if (vm.programas.length == 0) {
+                        alertify.error(response.data.mensaje);
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    alertify.error(error.statusText);
+                });
         }
 
         function registrarse() {

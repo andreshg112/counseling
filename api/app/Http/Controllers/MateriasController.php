@@ -30,7 +30,7 @@ class MateriasController extends Controller
     
     public function index()
     {
-        return Materia::all();
+        return Materia::with('programa')->get();
     }
     
     public function store(Request $request)
@@ -44,7 +44,8 @@ class MateriasController extends Controller
             $rules = [
             'codigo'      => 'required|unique:materias',
             'nombre'     => 'required',
-            'creditos'  => 'required|integer'
+            'creditos'  => 'required|integer',
+            'programa_id'  => 'required|exists:programas,id',
             ];
             
             try {

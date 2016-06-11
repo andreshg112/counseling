@@ -169,6 +169,8 @@
         }
 
         function limpiar() {
+            $('#hora_inicio').val('');
+            $('#hora_fin').val('');
             vm.horario = {};
         }
 

@@ -62,6 +62,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Programa:</label>
+                                <div class="col-sm-8">
+                                    <select name="programa_id" id="programa_id" class="form-control" ng-model="vm.usuario.programa_id" ng-options="programa.id as programa.nombre for programa in vm.programas" required>
+                                        <option selected value>Seleccione un programa</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <center id="fila-2-4">
                         <input type="button" class="btn btn-danger" value="Limpiar" ng-click="vm.limpiar()" />
@@ -86,6 +96,7 @@
                                 <th>Primer apellido</th>
                                 <th>Segundo apellido</th>
                                 <th>Tipo de usuario</th>
+                                <th>Programa</th>
                             </tr>
                             <tr ng-repeat="usuario in vm.usuarios | filter:vm.usuario track by $index">
                                 <td>{{$index + 1}}</td>
@@ -94,6 +105,7 @@
                                 <td>{{usuario.primer_apellido}}</td>
                                 <td>{{usuario.segundo_apellido}}</td>
                                 <td>{{usuario.tipo_usuario.capitalize()}}</td>
+                                <td>{{usuario.programa.nombre}}</td>
                             </tr>
                         </table>
                     </div>

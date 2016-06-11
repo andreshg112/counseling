@@ -14,7 +14,7 @@ class User extends Authenticatable
     * @var array
     */
     protected $fillable = [
-    'email', 'password', 'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'tipo_usuario',
+    'email', 'password', 'tipo_documento', 'numero_documento', 'primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'tipo_usuario', 'programa_id',
     ];
     
     /**
@@ -25,4 +25,9 @@ class User extends Authenticatable
     protected $hidden = [
     'password', 'remember_token',
     ];
+    
+    public function programa() {
+        return $this->belongsTo(Programa::class);
+    }
+    
 }

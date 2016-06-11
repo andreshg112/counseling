@@ -16,11 +16,19 @@
                 <div class="panel-heading">Registrar materia</div>
                 <div class="panel-body">
                     <div id="fila-2-1" class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label col-sm-2">Nombre:</label>
-                                <div class="col-sm-10">
+                                <label class="control-label col-sm-4">Nombre:</label>
+                                <div class="col-sm-8">
                                     <input id="nombre" class="form-control" type="text" ng-model="materiasVm.materia.nombre" required="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Código:</label>
+                                <div class="col-sm-8">
+                                    <input id="codigo" class="form-control" type="text" ng-model="materiasVm.materia.codigo" maxlength="7" required>
                                 </div>
                             </div>
                         </div>
@@ -28,18 +36,20 @@
                     <div id="fila-2-2" class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label col-sm-4">Código:</label>
+                                <label class="col-sm-4 control-label">Créditos:</label>
                                 <div class="col-sm-8">
-                                    <input id="codigo" class="form-control" type="text" ng-model="materiasVm.materia.codigo" required="" minlength="5" maxlength="7">
+                                    <select id="creditos" ng-model="materiasVm.materia.creditos" ng-options="credito for credito in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]" class="form-control" required>
+                                        <option selected value>Seleccione la cantidad de créditos</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="col-sm-4 control-label">Créditos:</label>
+                                <label class="col-sm-4 control-label">Programa:</label>
                                 <div class="col-sm-8">
-                                    <select id="creditos" ng-model="materiasVm.materia.creditos" ng-options="credito for credito in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]" class="form-control" required>
-                                        <option selected value>Seleccione la cantidad de créditos</option>
+                                    <select name="programa_id" id="programa_id" class="form-control" ng-model="materiasVm.materia.programa_id" ng-options="programa.id as programa.nombre for programa in materiasVm.programas" required>
+                                        <option selected value>Seleccione un programa</option>
                                     </select>
                                 </div>
                             </div>

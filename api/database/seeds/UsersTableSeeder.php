@@ -14,6 +14,8 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
         'email' => 'administrador@unicesar.edu.co',
         'password' => '1234',
+        'tipo_documento' => 'CC',
+        'numero_documento' => '1234567890',
         'primer_nombre' => 'Juan',
         'primer_apellido' => 'Díaz',
         'tipo_usuario' => 'administrador',

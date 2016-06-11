@@ -9,5 +9,10 @@ class Materia extends Model
 {
     use SoftDeletes;
     protected $table = 'materias';
-    protected $fillable = ['codigo', 'nombre', 'creditos'];
+    protected $fillable = ['codigo', 'nombre', 'creditos', 'programa_id'];
+    
+    public function programa() {
+        return $this->belongsTo(Programa::class);
+    }
+    
 }

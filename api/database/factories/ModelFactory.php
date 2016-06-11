@@ -24,7 +24,8 @@ $factory->define(App\Models\Materia::class, function (Faker\Generator $faker) {
     return [
     'codigo' => strtoupper($faker->bothify('??###')),
     'nombre' => $faker->catchPhrase,
-    'creditos' => $faker->numberBetween($min = 1, $max = 20)
+    'creditos' => $faker->numberBetween($min = 1, $max = 20),
+    'programa_id' => $faker->numberBetween($min = 1, $max = 18)
     ];
 });
 

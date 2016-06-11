@@ -5,21 +5,37 @@
         .module('app')
         .controller('VisualizarUsuariosController', VisualizarUsuariosController);
 
-    VisualizarUsuariosController.$inject = ['UsersService'];
+    VisualizarUsuariosController.$inject = ['UsersService', 'ProgramasService'];
 
-    function VisualizarUsuariosController(UsersService) {
+    function VisualizarUsuariosController(UsersService, ProgramasService) {
         console.log("Entró a VisualizarUsuariosController");
         var vm = this;
 
         //Declaraciones de variables públicas en orden alfabético.
-        vm.usuarios = [];
         vm.limpiar = limpiar;
+        vm.programas = [];
         vm.roles = ['alumno', 'tutor'];
+        vm.usuarios = [];
 
         //Funciones, en orden alfabético
         function activate() {
             vm.limpiar();
+            cargarProgramas();
             cargarUsuarios();
+        }
+
+        function cargarProgramas() {
+            ProgramasService.getAll()
+                .then(function(response) {
+                    vm.programas = response.data.result;
+                    if (vm.programas.length == 0) {
+                        alertify.error(response.data.mensaje);
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    alertify.error(error.statusText);
+                });
         }
 
         function cargarUsuarios() {

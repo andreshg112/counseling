@@ -5,9 +5,9 @@
         .module('app')
         .controller('MateriasController', MateriasController);
 
-    MateriasController.$inject = ['MateriasService'];
+    MateriasController.$inject = ['MateriasService', 'ProgramasService'];
 
-    function MateriasController(MateriasService) {
+    function MateriasController(MateriasService, ProgramasService) {
         console.log("Entró a MateriasController");
         var vm = this;
         var options = {
@@ -21,6 +21,7 @@
         vm.eliminar = eliminar;
         vm.guardar = guardar;
         vm.limpiar = limpiar;
+        vm.programas = [];
 
         //Funciones, en orden alfabético
         function activate() {
@@ -29,6 +30,7 @@
             } else {
                 vm.limpiar();
                 cargarMaterias();
+                cargarProgramas();
             }
         }
 
@@ -38,6 +40,20 @@
                     vm.materias = response.data;
                     if (vm.materias.length == 0) {
                         alertify.error('No hay registros.');
+                    }
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    alertify.error(error.statusText);
+                });
+        }
+
+        function cargarProgramas() {
+            ProgramasService.getAll()
+                .then(function(response) {
+                    vm.programas = response.data.result;
+                    if (vm.programas.length == 0) {
+                        alertify.error(response.data.mensaje);
                     }
                 })
                 .catch(function(error) {
