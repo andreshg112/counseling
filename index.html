@@ -35,11 +35,11 @@
                     <li><a href="#/visualizar-usuarios">Visualizar usuarios</a></li>
                 </ul>
                 <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'tutor'">
-                    <li><a href="#/">Tutor 1</a></li>
-                    <li><a href="#/">Tutor 2</a></li>
+                    <li><a href="#/">Ver asistentes</a></li>
                 </ul>
                 <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'alumno'">
                     <li><a href="#/buscar-horarios">Buscar horarios</a></li>
+                    <li><a href="#/calificar-tutores">Calificar tutores</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -84,11 +84,13 @@
     <script src="app/compartido/tutores.service.js"></script>
     <script src="app/compartido/users.service.js"></script>
     <script src="app/compartido/programas.service.js"></script>
+    <script src="app/calificar-tutores/calificar-tutores.service.js"></script>
     <script src="app/index/index.controller.js"></script>
     <script src="app/materias/materias.controller.js"></script>
     <script src="app/horarios/horarios.controller.js"></script>
     <script src="app/buscar-horarios/buscar-horarios.controller.js"></script>
     <script src="app/visualizar-usuarios/visualizar-usuarios.controller.js"></script>
+    <script src="app/calificar-tutores/calificar-tutores.controller.js"></script>
 </body>
 
 </html>

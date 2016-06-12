@@ -13,7 +13,7 @@ class UsersController extends Controller
     public function get_tutores()
     {
         $respuesta = [];
-        $respuesta['result'] = User::where('tipo_usuario', 'tutor')->get();
+        $respuesta['result'] = User::where('tipo_usuario', 'tutor')->with('programa')->get();
         if (count($respuesta['result']) == 0) {
             $respuesta['result'] = false;
             $respuesta['mensaje'] = "No hay registros.";
