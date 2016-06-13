@@ -11,6 +11,7 @@
         this.getAll = getAll;
         this.delete = dispose;
         this.post = post;
+        this.postAsistencia = postAsistencia;
         this.put = put;
 
         ////////////////
@@ -32,6 +33,12 @@
         function post(registro) {
             console.log("post");
             var req = $http.post(uri, registro);
+            return req;
+        }
+
+        function postAsistencia(id, registro) {
+            console.log("postAsistencia");
+            var req = $http.post(uri + "/" + id + "/asistencias", registro);
             return req;
         }
 

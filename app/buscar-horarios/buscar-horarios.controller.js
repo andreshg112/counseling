@@ -15,6 +15,7 @@
             storages: ['session']
         };
         var basil = new window.Basil(options);
+        var user = {};
 
         //Declaraciones de variables públicas en orden alfabético.
         vm.asistir = asistir;
@@ -29,6 +30,7 @@
             if (basil.get('user').tipo_usuario != 'alumno') {
                 location.href = '#/';
             } else {
+                user = basil.get('user');
                 vm.estaModificando = false;
                 vm.limpiar();
                 cargarHorarios();
@@ -43,10 +45,23 @@
                 if (hoy.toTimeString() >= horario.hora_fin) {
                     alertify.error("Se ha pasado la hora de la asesoría. Inténtalo nuevamente el " + horario.dia.capitalize() + " antes de las " + horario.hora_fin);
                 } else {
-                    alertify.success("Tu asistencia a esta asesoría se registró correctamente.");
+                    alertify.prompt('Mensaje', '¿Sobre cuál(es) tema(s) quieres recibir asesorías?', horario.materia.nombre,
+                        function(evt, value) {
+                            var temas_tutoriados = value;
+                            var hoy = new Date();
+                            var asistencia = {
+                                'horario_id': horario.id,
+                                'alumno_id': user.id,
+                                'fecha': hoy.getFullYear() + "-" + (hoy.getMonth() + 1) + "-" + hoy.getDate(),
+                                'temas_tutoriados': temas_tutoriados
+                            };
+                            enviarAsistencia(asistencia);
+                        },
+                        function() {
+                            //Si presiona Cancel
+                        }
+                    );
                 }
-                console.log('Disponible');
-
             } else {
                 alertify.error("El día de hoy no está disponible la asesoría. Inténtalo nuevamente el " + horario.dia.capitalize() + ".");
             }
@@ -96,6 +111,29 @@
 
         function getNombreCompletoTutor(tutor) {
             return tutor.primer_nombre + ' ' + tutor.segundo_nombre + ' ' + tutor.primer_apellido + ' ' + tutor.segundo_apellido;
+        }
+
+        function enviarAsistencia(asistencia) {
+            HorariosService.postAsistencia(asistencia.horario_id, asistencia).then(function(response) {
+                    console.log(response);
+                    if (response.data.result) {
+                        //alertify.success(response.data.mensaje);
+                        alertify.success("Tu asistencia a esta asesoría se registró correctamente.");
+                        activate();
+                    } else if (response.data.validator) {
+                        alertify.error(response.data.mensaje);
+                        response.data.validator.forEach(function(element) {
+                            alertify.error(element);
+                        }, this);
+                    } else {
+                        alertify.error(response.data.mensaje);
+                    }
+
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    alertify.error(error.statusText);
+                });
         }
 
         function limpiar() {
