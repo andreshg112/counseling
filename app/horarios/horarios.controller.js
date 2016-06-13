@@ -106,31 +106,6 @@
                 });
         }
 
-        /*function guardar() {
-            vm.horario.hora_inicio = $('#hora_inicio').val();
-            vm.horario.hora_fin = $('#hora_fin').val();
-            console.log(vm.horario);
-            HorariosService.post(vm.horario).then(function(response) {
-                    console.log(response);
-                    if (response.data.result) {
-                        alertify.success(response.data.mensaje);
-                        activate();
-                    } else if (response.data.validator) {
-                        alertify.error(response.data.mensaje);
-                        response.data.validator.forEach(function(element) {
-                            alertify.error(element);
-                        }, this);
-                    } else {
-                        alertify.error(response.data.mensaje);
-                    }
-
-                })
-                .catch(function(error) {
-                    console.log(error);
-                    alertify.error(error.statusText);
-                });
-        }*/
-
         function getNombreCompletoTutor(tutor) {
             return tutor.primer_nombre + ' ' + tutor.segundo_nombre + ' ' + tutor.primer_apellido + ' ' + tutor.segundo_apellido;
         }
@@ -173,31 +148,6 @@
             $('#hora_fin').val('');
             vm.horario = {};
         }
-
-        /*function modificar() {
-            vm.horario.hora_inicio = $('#hora_inicio').val();
-            vm.horario.hora_fin = $('#hora_fin').val();
-            console.log(vm.horario);
-            HorariosService.put(vm.horario).then(function(response) {
-                    console.log(response);
-                    if (response.data.result) {
-                        alertify.success(response.data.mensaje);
-                        activate();
-                    } else if (response.data.validator) {
-                        alertify.error(response.data.mensaje);
-                        response.data.validator.forEach(function(element) {
-                            alertify.error(element);
-                        }, this);
-                    } else {
-                        alertify.error(response.data.mensaje);
-                    }
-
-                })
-                .catch(function(error) {
-                    console.log(error);
-                    alertify.error(error.statusText);
-                });
-        }*/
 
         activate();
     }

@@ -10,6 +10,11 @@
     function VisualizarUsuariosController(UsersService, ProgramasService) {
         console.log("Entró a VisualizarUsuariosController");
         var vm = this;
+        var options = {
+            namespace: 'counseling',
+            storages: ['session']
+        };
+        var basil = new window.Basil(options);
 
         //Declaraciones de variables públicas en orden alfabético.
         vm.limpiar = limpiar;
@@ -19,9 +24,13 @@
 
         //Funciones, en orden alfabético
         function activate() {
-            vm.limpiar();
-            cargarProgramas();
-            cargarUsuarios();
+            if (basil.get('user').tipo_usuario != 'administrador') {
+                location.href = '#/';
+            } else {
+                vm.limpiar();
+                cargarProgramas();
+                cargarUsuarios();
+            }
         }
 
         function cargarProgramas() {
