@@ -10,29 +10,6 @@ use \stdClass;
 class CalificacionesController extends Controller
 {
     
-    public function destroy($id)
-    {
-        $instancia = Horario::find($id);
-        $respuesta = new stdClass();
-        if ($instancia) {
-            $respuesta->result = $instancia->forceDelete();
-            if ($respuesta->result) {
-                $respuesta->mensaje = "Eliminado correctamente.";
-                $respuesta->eliminado = $instancia;
-            } else {
-                $respuesta->mensaje = "Error tratando de eliminar.";
-            }
-        } else {
-            $respuesta->mensaje = "No se encuentra registrado.";
-        }
-        return (array) $respuesta;
-    }
-    
-    public function index()
-    {
-        return Horario::with('materia', 'tutor')->get();
-    }
-    
     public function store(Request $request)
     {
         $respuesta = [];
@@ -44,7 +21,7 @@ class CalificacionesController extends Controller
             'alumno_id'  => 'required|exists:users,id,tipo_usuario,alumno|unique_with:calificaciones,tutor_id',
             'tutor_id'  => 'required|exists:users,id,tipo_usuario,tutor',
             'nota'  => 'required|in:1,2,3,4,5',
-            'observaciones'  => 'required|string',
+            'observaciones'  => 'string',
             ];
             
             try {
@@ -85,7 +62,7 @@ class CalificacionesController extends Controller
                 'alumno_id'  => 'required|exists:calificaciones,alumno_id,tutor_id,'.$instancia->tutor_id,
                 'tutor_id'  => 'required|exists:calificaciones,tutor_id,alumno_id,'.$instancia->alumno_id,
                 'nota'  => 'required|in:1,2,3,4,5',
-                'observaciones'  => 'required|string',
+                'observaciones'  => 'string',
                 ];
                 try {
                     $validator = \Validator::make($request->all(), $rules);
@@ -112,11 +89,6 @@ class CalificacionesController extends Controller
             }
         }
         return $respuesta;
-    }
-    
-    public function show($id)
-    {
-        return Horario::findOrFail($id);
     }
     
 }

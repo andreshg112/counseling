@@ -5,9 +5,9 @@
         .module('app')
         .controller('CalificarTutoresController', CalificarTutoresController);
 
-    CalificarTutoresController.$inject = ['TutoresService', 'ProgramasService', 'CalificarTutoresService', 'ngDialog'];
+    CalificarTutoresController.$inject = ['TutoresService', 'ProgramasService', 'CalificarTutoresService', '$scope'];
 
-    function CalificarTutoresController(TutoresService, ProgramasService, CalificarTutoresService, ngDialog) {
+    function CalificarTutoresController(TutoresService, ProgramasService, CalificarTutoresService, $scope) {
         console.log("Entró a CalificarTutoresController");
         var vm = this;
         var options = {
@@ -58,6 +58,7 @@
         }
 
         function cargarTutores() {
+            vm.tutores = [];
             TutoresService.getConCalificacionAlumno(user.id)
                 .then(function(response) {
                     vm.tutores = response.data.result;
@@ -89,9 +90,17 @@
                 'nota': vm.tutorSeleccionado.calificacion.nota,
                 'observaciones': vm.tutorSeleccionado.calificacion.observaciones
             };
-            CalificarTutoresService.post(calificacion).then(function(response) {
+            var promesa;
+            if (vm.tutorSeleccionado.estaCalificado) {
+                calificacion.id = vm.tutorSeleccionado.calificacion.id;
+                promesa = CalificarTutoresService.put(calificacion);
+            } else {
+                promesa = CalificarTutoresService.post(calificacion);
+            }
+            promesa.then(function(response) {
                     console.log(response);
                     if (response.data.result) {
+                        vm.tutorSeleccionado.estaCalificado = true;
                         alertify.success(response.data.mensaje);
                         $('#modal-calificar').modal('hide');
                         activate();

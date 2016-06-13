@@ -11,6 +11,7 @@
         this.getAll = getAll;
         this.delete = dispose;
         this.post = post;
+        this.put = put;
 
         ////////////////
 
@@ -31,6 +32,12 @@
         function post(registro) {
             console.log("post");
             var req = $http.post(uri, registro);
+            return req;
+        }
+
+        function put(registro) {
+            console.log("put");
+            var req = $http.put(uri + "/" + registro.id, registro);
             return req;
         }
     }

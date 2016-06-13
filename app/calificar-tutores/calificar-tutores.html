@@ -88,7 +88,7 @@
                                 <th>Programa</th>
                                 <th></th>
                             </tr>
-                            <tr ng-repeat="tutor in calificarVm.tutores | filter:calificarVm.tutor track by $index">
+                            <tr ng-repeat="tutor in calificarVm.tutores | filter:calificarVm.tutor track by $index" ng-init="tutor.estaCalificado = !!tutor.calificacion">
                                 <td>{{$index + 1}}</td>
                                 <td>{{tutor.primer_nombre}}</td>
                                 <td>{{tutor.segundo_nombre}}</td>
@@ -96,7 +96,9 @@
                                 <td>{{tutor.segundo_apellido}}</td>
                                 <td>{{tutor.programa.nombre}}</td>
                                 <td>
-                                    <input type="button" name="btn-calificar{{$index+1}}" id="btn-calificar{{$index+1}}" value="Calificar" class="btn btn-primary btn-sm" ng-click="calificarVm.calificar(tutor)" />
+                                    <center>
+                                        <input type="button" name="btn-calificar{{$index+1}}" id="btn-calificar{{$index+1}}" value="Calificar" class="btn btn-primary btn-sm" ng-click="calificarVm.calificar(tutor)" />
+                                    </center>
                                 </td>
                             </tr>
                         </table>
@@ -146,7 +148,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" name="btn-cancelar-tutor" id="btn-cancelar-tutor" class="btn btn-default" data-dismiss="modal" value="Cancelar" />
-                    <input type="submit" name="btn-calificar-tutor" id="btn-calificar-tutor" class="btn btn-primary" value="Guardar" />
+                    <input ng-if="!calificarVm.tutorSeleccionado.estaCalificado" type="submit" name="btn-calificar-tutor" id="btn-calificar-tutor" class="btn btn-primary" value="Guardar" />
+                    <input ng-if="calificarVm.tutorSeleccionado.estaCalificado" type="submit" name="btn-actualizar-calificacion" id="-actualizar-calificacion" class="btn btn-info" value="Actualizar" />
                 </div>
             </div>
         </div>

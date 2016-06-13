@@ -142,7 +142,7 @@
             var promesa;
             if (vm.estaModificando) {
                 //Si está modificando (actualiando, editando), entonces hace un put.
-                promesa = promesa = HorariosService.put(vm.horario);
+                promesa = HorariosService.put(vm.horario);
             } else {
                 //Si está registrando uno nuevo, hace un post.
                 promesa = HorariosService.post(vm.horario);
