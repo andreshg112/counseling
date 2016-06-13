@@ -78,6 +78,7 @@
                                 <th>Código</th>
                                 <th>Nombre</th>
                                 <th>Créditos</th>
+                                <th>Programa</th>
                                 <th>&nbsp;</th>
                             </tr>
                             <tr ng-repeat="materia in materiasVm.materias| filter:{'codigo': materiasVm.materia.codigo} track by $index">
@@ -85,6 +86,7 @@
                                 <td>{{materia.codigo}}</td>
                                 <td>{{materia.nombre}}</td>
                                 <td>{{materia.creditos}}</td>
+                                <td>{{materia.programa.nombre}}</td>
                                 <td><a ng-click="materiasVm.eliminar(materia)" href="javascript:;">Eliminar</a></td>
                             </tr>
                         </table>

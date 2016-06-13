@@ -21,6 +21,17 @@ class UsersController extends Controller
         return $respuesta;
     }
     
+    public function get_tutores_con_calificacion_alumno($alumno_id)
+    {
+        $respuesta = [];
+        $respuesta['result'] = User::where('tipo_usuario', 'tutor')->with('programa')->get();
+        if (count($respuesta['result']) == 0) {
+            $respuesta['result'] = false;
+            $respuesta['mensaje'] = "No hay registros.";
+        }
+        return $respuesta;
+    }
+    
     public function index()
     {
         $respuesta = [];

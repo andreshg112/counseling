@@ -106,7 +106,7 @@
                 });
         }
 
-        function guardar() {
+        /*function guardar() {
             vm.horario.hora_inicio = $('#hora_inicio').val();
             vm.horario.hora_fin = $('#hora_fin').val();
             console.log(vm.horario);
@@ -129,7 +129,7 @@
                     console.log(error);
                     alertify.error(error.statusText);
                 });
-        }
+        }*/
 
         function getNombreCompletoTutor(tutor) {
             return tutor.primer_nombre + ' ' + tutor.segundo_nombre + ' ' + tutor.primer_apellido + ' ' + tutor.segundo_apellido;
@@ -174,7 +174,7 @@
             vm.horario = {};
         }
 
-        function modificar() {
+        /*function modificar() {
             vm.horario.hora_inicio = $('#hora_inicio').val();
             vm.horario.hora_fin = $('#hora_fin').val();
             console.log(vm.horario);
@@ -197,7 +197,7 @@
                     console.log(error);
                     alertify.error(error.statusText);
                 });
-        }
+        }*/
 
         activate();
     }

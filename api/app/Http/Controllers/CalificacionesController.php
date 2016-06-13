@@ -41,7 +41,7 @@ class CalificacionesController extends Controller
             $respuesta['mensaje'] = 'Los datos enviados no tienen el formato correcto.';
         } else {
             $rules = [
-            'alumno_id'  => 'required|exists:users,id,tipo_usuario,alumno',
+            'alumno_id'  => 'required|exists:users,id,tipo_usuario,alumno|unique_with:calificaciones,tutor_id',
             'tutor_id'  => 'required|exists:users,id,tipo_usuario,tutor',
             'calificacion'  => 'required|in:1,2,3,4,5',
             'observaciones'  => 'required|string',

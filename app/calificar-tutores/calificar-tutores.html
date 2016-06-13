@@ -54,16 +54,6 @@
                     <div id="fila-2-3" class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label class="control-label col-sm-4">Tipo de tutor:</label>
-                                <div class="col-sm-8">
-                                    <select name="tipo_tutor" id="tipo_tutor" class="form-control" ng-model="calificarVm.tutor.tipo_tutor" ng-options="rol as rol.capitalize() for rol in calificarVm.roles" required>
-                                            <option selected value>Seleccione un rol</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
                                 <label class="col-sm-4 control-label">Programa:</label>
                                 <div class="col-sm-8">
                                     <select name="programa_id" id="programa_id" class="form-control" ng-model="calificarVm.tutor.programa_id" ng-options="programa.id as programa.nombre for programa in calificarVm.programas" required>
@@ -84,7 +74,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    tutors registrados
+                    Tutores registrados
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -96,6 +86,7 @@
                                 <th>Primer apellido</th>
                                 <th>Segundo apellido</th>
                                 <th>Programa</th>
+                                <th></th>
                             </tr>
                             <tr ng-repeat="tutor in calificarVm.tutores | filter:calificarVm.tutor track by $index">
                                 <td>{{$index + 1}}</td>
@@ -104,9 +95,58 @@
                                 <td>{{tutor.primer_apellido}}</td>
                                 <td>{{tutor.segundo_apellido}}</td>
                                 <td>{{tutor.programa.nombre}}</td>
+                                <td>
+                                    <input type="button" name="btn-calificar{{$index+1}}" id="btn-calificar{{$index+1}}" value="Calificar" class="btn btn-primary btn-sm" ng-click="calificarVm.calificar(tutor)" />
+                                </td>
                             </tr>
                         </table>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form class="form-horizontal" ng-submit="calificarVm.guardar()">
+    <div id="modal-calificar" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{calificarVm.getNombreCompletoUser(calificarVm.tutorSeleccionado)}}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Calificación:</label>
+                                <div class="col-sm-9">
+                                    <select name="calificacion-tutor" id="calificacion-tutor" class="form-control" ng-model="calificarVm.tutorSeleccionado.calificacion" ng-options="calificacion for calificacion in calificarVm.calificaciones" required>
+                                        <option selected value>Escoja una calificación</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="observaciones" class="col-sm-3 control-label">Observaciones:</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" rows="3" id="observaciones" ng-model="calificarVm.tutorSeleccionado.observaciones"></textarea>
+                                    <span class="help-block">
+                                        Tu calificación es anónima.
+                                        <br>
+                                        La calificación será enviada después de hacer clic en el botón Guardar.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" name="btn-cancelar-tutor" id="btn-cancelar-tutor" class="btn btn-default" data-dismiss="modal" value="Cancelar" />
+                    <input type="submit" name="btn-calificar-tutor" id="btn-calificar-tutor" class="btn btn-primary" value="Guardar" />
                 </div>
             </div>
         </div>
