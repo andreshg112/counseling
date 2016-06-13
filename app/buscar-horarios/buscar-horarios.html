@@ -88,6 +88,7 @@
                                 <th>Día</th>
                                 <th>Hora de inicio</th>
                                 <th>Hora de finalización</th>
+                                <th></th>
                             </tr>
                             <tr ng-repeat="horario in horariosVm.horarios | filter:horariosVm.horario track by $index">
                                 <td>{{$index + 1}}</td>
@@ -96,6 +97,7 @@
                                 <td>{{horario.dia.capitalize()}}</td>
                                 <td>{{horario.hora_inicio}}</td>
                                 <td>{{horario.hora_fin}}</td>
+                                <td><a ng-click="horariosVm.asistir(horario)" href="javascript:;">Asistir</a></td>
                             </tr>
                         </table>
                     </div>

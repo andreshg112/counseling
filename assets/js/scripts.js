@@ -23,6 +23,17 @@ String.prototype.capitalize = function() {
 };
 
 /**
+ * Retorna el día de la semana (en letras y en español) correspondiente a una fecha. (Beta)
+ * 
+ * @param fecha_recibida La fecha a evaluar.
+ * @returns El día de la semana correspondiente a la fecha recibida. 
+ */
+function getDiaSemana(fecha_recibida) {
+    var dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    return dias[fecha_recibida.getDay()];
+}
+
+/**
  * Función range(), similar a la de Python. Retorna un array, recibiendo su inicio, final (no incluyente) y paso.
  * 
  * @param start Inicio

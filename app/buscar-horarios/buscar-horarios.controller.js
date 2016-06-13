@@ -17,6 +17,7 @@
         var basil = new window.Basil(options);
 
         //Declaraciones de variables públicas en orden alfabético.
+        vm.asistir = asistir;
         vm.dias = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         vm.getNombreCompletoTutor = getNombreCompletoTutor;
         vm.horarios = [];
@@ -33,6 +34,21 @@
                 cargarHorarios();
                 cargarMaterias();
                 cargarTutores();
+            }
+        }
+
+        function asistir(horario) {
+            var hoy = new Date();
+            if (horario.dia == getDiaSemana(hoy)) {
+                if (hoy.toTimeString() >= horario.hora_fin) {
+                    alertify.error("Se ha pasado la hora de la asesoría. Inténtalo nuevamente el " + horario.dia.capitalize() + " antes de las " + horario.hora_fin);
+                } else {
+                    alertify.success("Tu asistencia a esta asesoría se registró correctamente.");
+                }
+                console.log('Disponible');
+
+            } else {
+                alertify.error("El día de hoy no está disponible la asesoría. Inténtalo nuevamente el " + horario.dia.capitalize() + ".");
             }
         }
 
