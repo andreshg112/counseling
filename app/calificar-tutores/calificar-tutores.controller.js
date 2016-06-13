@@ -120,6 +120,7 @@
         }
 
         function limpiar() {
+            vm.tutor = {};
             vm.tutorSeleccionado = {};
         }
 

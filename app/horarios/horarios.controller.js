@@ -107,7 +107,16 @@
         }
 
         function getNombreCompletoTutor(tutor) {
-            return tutor.primer_nombre + ' ' + tutor.segundo_nombre + ' ' + tutor.primer_apellido + ' ' + tutor.segundo_apellido;
+            //return tutor.primer_nombre + ' ' + tutor.segundo_nombre + ' ' + tutor.primer_apellido + ' ' + tutor.segundo_apellido;
+            return getNombreCompletoUser(tutor);
+        }
+
+        function getNombreCompletoUser(user) {
+            var nombreCompleto = user.primer_nombre;
+            nombreCompleto += user.segundo_nombre != null && user.segundo_nombre != "" ? " " + user.segundo_nombre : "";
+            nombreCompleto += " " + user.primer_apellido;
+            nombreCompleto += user.segundo_apellido != null && user.segundo_apellido != "" ? " " + user.segundo_apellido : "";
+            return nombreCompleto;
         }
 
         function enviarFormulario() {

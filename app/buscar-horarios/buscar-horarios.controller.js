@@ -114,7 +114,8 @@
         }
 
         function enviarAsistencia(asistencia) {
-            HorariosService.postAsistencia(asistencia.horario_id, asistencia).then(function(response) {
+            HorariosService.postAsistencia(asistencia.horario_id, asistencia)
+                .then(function(response) {
                     console.log(response);
                     if (response.data.result) {
                         //alertify.success(response.data.mensaje);
@@ -128,7 +129,6 @@
                     } else {
                         alertify.error(response.data.mensaje);
                     }
-
                 })
                 .catch(function(error) {
                     console.log(error);
