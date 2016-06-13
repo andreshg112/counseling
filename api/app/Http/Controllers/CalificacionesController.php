@@ -10,6 +10,17 @@ use \stdClass;
 class CalificacionesController extends Controller
 {
     
+    public function get_by_tutor($tutor_id)
+    {
+        $respuesta = [];
+        $respuesta['result'] = Calificacion::select('nota', 'observaciones')->where('tutor_id', $tutor_id)->get();
+        if (count($respuesta['result']) == 0) {
+            $respuesta['result'] = false;
+            $respuesta['mensaje'] = "No hay registros.";
+        }
+        return $respuesta;
+    }
+    
     public function store(Request $request)
     {
         $respuesta = [];

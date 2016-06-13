@@ -34,6 +34,11 @@
                         controller: 'CalificarTutoresController',
                         controllerAs: 'calificarVm'
                     })
+                    .when('/ver-calificaciones', {
+                        templateUrl: 'app/ver-calificaciones/ver-calificaciones.html',
+                        controller: 'VerCalificacionesController',
+                        controllerAs: 'vm'
+                    })
                     .otherwise({
                         redirectTo: '/'
                     });

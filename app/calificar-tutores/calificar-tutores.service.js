@@ -9,6 +9,7 @@
 
     function CalificarTutoresService($http) {
         this.getAll = getAll;
+        this.getByTutor = getByTutor;
         this.delete = dispose;
         this.post = post;
         this.put = put;
@@ -20,6 +21,12 @@
         function getAll() {
             console.log("get_all");
             var req = $http.get(uri);
+            return req;
+        }
+
+        function getByTutor(tutorId) {
+            console.log("get_all");
+            var req = $http.get("api/public/tutores" + "/" + tutorId + "/calificaciones");
             return req;
         }
 

@@ -15,12 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['middleware' => 'cors'], function() {
-    Route::resource('materias', 'MateriasController', ['except' => ['create', 'edit']]);
-    Route::get('tutores', 'UsersController@get_tutores');
     Route::get('alumnos/{alumno_id}/tutores/calificacion', 'UsersController@get_tutores_con_calificacion_alumno');
-    Route::resource('horarios', 'HorariosController', ['except' => ['create', 'edit']]);
-    Route::resource('users', 'UsersController', ['only' => ['index', 'store']]);
-    Route::resource('programas', 'ProgramasController', ['only' => ['index']]);
     Route::resource('calificaciones', 'CalificacionesController', ['only' => ['store', 'update']]);
+    Route::resource('horarios', 'HorariosController', ['except' => ['create', 'edit']]);
     Route::post('login', 'UsersController@login');
+    Route::resource('materias', 'MateriasController', ['except' => ['create', 'edit']]);
+    Route::resource('programas', 'ProgramasController', ['only' => ['index']]);
+    Route::get('tutores', 'UsersController@get_tutores');
+    Route::get('tutores/{tutor_id}/calificaciones', 'CalificacionesController@get_by_tutor');
+    Route::resource('users', 'UsersController', ['only' => ['index', 'store']]);
 });
