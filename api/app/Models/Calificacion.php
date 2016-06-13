@@ -9,6 +9,6 @@ class Calificacion extends Model
 {
     use SoftDeletes;
     protected $table = 'calificaciones';
-    protected $fillable = ['alumno_id', 'tutor_id', 'calificacion', 'observaciones'];
+    protected $fillable = ['alumno_id', 'tutor_id', 'nota', 'observaciones'];
     
 }

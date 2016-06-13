@@ -17,9 +17,10 @@ Route::get('/', function () {
 Route::group(['middleware' => 'cors'], function() {
     Route::resource('materias', 'MateriasController', ['except' => ['create', 'edit']]);
     Route::get('tutores', 'UsersController@get_tutores');
+    Route::get('alumnos/{alumno_id}/tutores/calificacion', 'UsersController@get_tutores_con_calificacion_alumno');
     Route::resource('horarios', 'HorariosController', ['except' => ['create', 'edit']]);
     Route::resource('users', 'UsersController', ['only' => ['index', 'store']]);
     Route::resource('programas', 'ProgramasController', ['only' => ['index']]);
-    Route::resource('calificaciones', 'CalificacionesController', ['only' => ['store']]);
+    Route::resource('calificaciones', 'CalificacionesController', ['only' => ['store', 'update']]);
     Route::post('login', 'UsersController@login');
 });

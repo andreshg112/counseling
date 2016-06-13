@@ -15,11 +15,11 @@
             storages: ['session']
         };
         var basil = new window.Basil(options);
+        var user = {};
 
         //Declaraciones de variables públicas en orden alfabético.
-        vm.calificaciones = [1, 2, 3, 4, 5];
+        vm.notas = ['1', '2', '3', '4', '5'];
         vm.calificar = calificar;
-        vm.cancelarCalificacion = cancelarCalificacion;
         vm.getNombreCompletoUser = getNombreCompletoUser;
         vm.guardar = guardar;
         vm.limpiar = limpiar;
@@ -31,6 +31,7 @@
             if (basil.get('user').tipo_usuario != 'alumno') {
                 location.href = '#/';
             } else {
+                user = basil.get('user');
                 vm.limpiar();
                 cargarProgramas();
                 cargarTutores();
@@ -40,10 +41,6 @@
         function calificar(tutor) {
             vm.tutorSeleccionado = tutor;
             $('#modal-calificar').modal('show');
-        }
-
-        function cancelarCalificacion() {
-            $('#modal-calificar').modal('hide');
         }
 
         function cargarProgramas() {
@@ -61,7 +58,7 @@
         }
 
         function cargarTutores() {
-            TutoresService.getAll()
+            TutoresService.getConCalificacionAlumno(user.id)
                 .then(function(response) {
                     vm.tutores = response.data.result;
                     if (vm.tutores.length == 0) {
@@ -89,13 +86,14 @@
             var calificacion = {
                 'tutor_id': vm.tutorSeleccionado.id,
                 'alumno_id': basil.get('user').id,
-                'calificacion': vm.tutorSeleccionado.calificacion,
-                'observaciones': vm.tutorSeleccionado.observaciones
+                'nota': vm.tutorSeleccionado.calificacion.nota,
+                'observaciones': vm.tutorSeleccionado.calificacion.observaciones
             };
             CalificarTutoresService.post(calificacion).then(function(response) {
                     console.log(response);
                     if (response.data.result) {
                         alertify.success(response.data.mensaje);
+                        $('#modal-calificar').modal('hide');
                         activate();
                     } else if (response.data.validator) {
                         alertify.error(response.data.mensaje);
@@ -113,7 +111,7 @@
         }
 
         function limpiar() {
-            vm.tutor = {};
+            vm.tutorSeleccionado = {};
         }
 
         activate();

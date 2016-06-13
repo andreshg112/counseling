@@ -43,7 +43,7 @@ class CalificacionesController extends Controller
             $rules = [
             'alumno_id'  => 'required|exists:users,id,tipo_usuario,alumno|unique_with:calificaciones,tutor_id',
             'tutor_id'  => 'required|exists:users,id,tipo_usuario,tutor',
-            'calificacion'  => 'required|in:1,2,3,4,5',
+            'nota'  => 'required|in:1,2,3,4,5',
             'observaciones'  => 'required|string',
             ];
             
@@ -78,15 +78,14 @@ class CalificacionesController extends Controller
             $respuesta['result'] = false;
             $respuesta['mensaje'] = 'Los datos enviados no tienen el formato correcto.';
         } else {
-            $instancia = Horario::find($id);
+            $instancia = Calificacion::find($id);
             if ($instancia) {
                 $instancia->fill($request->all());
                 $rules = [
-                'materia_id'      => 'required|exists:materias,id',
-                'tutor_id'  => 'required|exists:users,id,tipo_usuario,tutor',
-                'dia'  => 'required|in:lunes,martes,miércoles,jueves,viernes,sábado',
-                'hora_inicio'  => 'required',
-                'hora_fin'  => 'required'
+                'alumno_id'  => 'required|exists:calificaciones,alumno_id,tutor_id,'.$instancia->tutor_id,
+                'tutor_id'  => 'required|exists:calificaciones,tutor_id,alumno_id,'.$instancia->alumno_id,
+                'nota'  => 'required|in:1,2,3,4,5',
+                'observaciones'  => 'required|string',
                 ];
                 try {
                     $validator = \Validator::make($request->all(), $rules);

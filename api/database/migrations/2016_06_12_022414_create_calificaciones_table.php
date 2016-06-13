@@ -24,7 +24,7 @@ class CreateCalificacionesTable extends Migration
             ->references('id')->on('users')
             ->onDelete('cascade')
             ->onUpdate('cascade');
-            $table->enum('calificacion', [1, 2, 3, 4, 5])->nullable();
+            $table->enum('nota', [1, 2, 3, 4, 5])->nullable();
             $table->string('observaciones');
             $table->unique(['alumno_id', 'tutor_id']);
             $table->timestamps();

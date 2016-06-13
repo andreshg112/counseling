@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\User;
+use App\Models\Calificacion;
 use \stdClass;
 
 class UsersController extends Controller
@@ -25,6 +26,10 @@ class UsersController extends Controller
     {
         $respuesta = [];
         $respuesta['result'] = User::where('tipo_usuario', 'tutor')->with('programa')->get();
+        foreach ($respuesta['result'] as $tutor) {
+            $tutor->calificacion = Calificacion::where('alumno_id', $alumno_id)
+            ->where('tutor_id', $tutor->id)->first();
+        }
         if (count($respuesta['result']) == 0) {
             $respuesta['result'] = false;
             $respuesta['mensaje'] = "No hay registros.";

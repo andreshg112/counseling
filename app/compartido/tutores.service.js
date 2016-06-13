@@ -9,6 +9,7 @@
 
     function TutoresService($http) {
         this.getAll = getAll;
+        this.getConCalificacionAlumno = getConCalificacionAlumno;
         this.delete = dispose;
         this.post = post;
 
@@ -19,6 +20,12 @@
         function getAll() {
             console.log("get_all");
             var req = $http.get(uri);
+            return req;
+        }
+
+        function getConCalificacionAlumno(alumno_id) {
+            console.log("getConCalificacionAlumno");
+            var req = $http.get("api/public/alumnos/" + alumno_id + "/tutores/calificacion");
             return req;
         }
 

@@ -121,7 +121,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Calificación:</label>
                                 <div class="col-sm-9">
-                                    <select name="calificacion-tutor" id="calificacion-tutor" class="form-control" ng-model="calificarVm.tutorSeleccionado.calificacion" ng-options="calificacion for calificacion in calificarVm.calificaciones" required>
+                                    <select name="nota-tutor" id="nota-tutor" class="form-control" ng-model="calificarVm.tutorSeleccionado.calificacion.nota" ng-options="nota for nota in calificarVm.notas" required>
                                         <option selected value>Escoja una calificación</option>
                                     </select>
                                 </div>
@@ -133,7 +133,7 @@
                             <div class="form-group">
                                 <label for="observaciones" class="col-sm-3 control-label">Observaciones:</label>
                                 <div class="col-sm-9">
-                                    <textarea class="form-control" rows="3" id="observaciones" ng-model="calificarVm.tutorSeleccionado.observaciones"></textarea>
+                                    <textarea class="form-control" rows="3" id="observaciones" ng-model="calificarVm.tutorSeleccionado.calificacion.observaciones"></textarea>
                                     <span class="help-block">
                                         Tu calificación es anónima.
                                         <br>
