@@ -29,30 +29,16 @@
             } else {
                 user = basil.get('user');
                 cargarAsistencias();
-                cargarMaterias();
             }
         }
 
         function cargarAsistencias() {
             AsistenciasService.getByTutor(user.id)
                 .then(function(response) {
-                    vm.asistencias = response.data.result;
-                    if (vm.asistencias.length == 0) {
+                    if (!response.data.result) {
                         alertify.error(response.data.mensaje);
-                    }
-                })
-                .catch(function(error) {
-                    console.log(error);
-                    alertify.error(error.statusText);
-                });
-        }
-
-        function cargarMaterias() {
-            MateriasService.getAll()
-                .then(function(response) {
-                    vm.materias = response.data;
-                    if (vm.materias.length == 0) {
-                        alertify.error('No se han registrado materias.');
+                    } else {
+                        vm.asistencias = response.data.result;
                     }
                 })
                 .catch(function(error) {

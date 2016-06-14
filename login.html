@@ -91,6 +91,11 @@
                                         <input type="text" name="segundo_apellido" id="segundo_apellido" ng-model="login.usuarioRegistro.segundo_apellido" class="form-control" placeholder="Segundo apellido" value="">
                                     </div>
                                     <div class="form-group">
+                                        <select name="genero" id="genero" class="form-control" ng-model="login.usuarioRegistro.genero" ng-options="genero as genero.capitalize() for genero in login.generos" required>
+                                            <option selected value>Seleccione su género</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <select name="programa_id" id="programa_id" class="form-control" ng-model="login.usuarioRegistro.programa_id" ng-options="programa.id as programa.nombre for programa in login.programas" required>
                                             <option selected value>Seleccione el programa al que pertenezca</option>
                                         </select>

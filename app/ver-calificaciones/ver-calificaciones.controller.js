@@ -34,9 +34,10 @@
         function cargarCalificaciones() {
             CalificarTutoresService.getByTutor(user.id)
                 .then(function(response) {
-                    vm.calificaciones = response.data.result;
-                    if (vm.calificaciones.length == 0) {
+                    if (!response.data.result) {
                         alertify.error(response.data.mensaje);
+                    } else {
+                        vm.calificaciones = response.data.result;
                     }
                 })
                 .catch(function(error) {

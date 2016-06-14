@@ -92,14 +92,15 @@ class UsersController extends Controller
             $respuesta['mensaje'] = "Los datos enviados no tienen el formato correcto.";
         } else {
             $rules = [
-            'tipo_documento'      => 'required|string||in:CC,CE,TI',
+            'tipo_documento'      => 'required|string|in:CC,CE,TI',
             'numero_documento'      => 'required|unique:users|numeric',
             'primer_nombre'      => 'required|string',
             'primer_apellido'  => 'required|string',
+            'genero'  => 'required|string|in:masculino,femenino,otro',
             'tipo_usuario'  => 'required|string|in:tutor,alumno',
             'programa_id'  => 'required|exists:programas,id',
             'email'  => 'required|email|unique:users',
-            'password'  => 'required|string'
+            'password'  => 'required|string',
             ];
             try {
                 $validator = \Validator::make($request->all(), $rules);

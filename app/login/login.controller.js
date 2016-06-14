@@ -17,6 +17,7 @@
         var basil = new window.Basil(options);
 
         //Declaraciones de variables públicas en orden alfabético.
+        vm.generos = ['masculino', 'femenino', 'otro'];
         vm.iniciarSesion = iniciarSesion;
         vm.limpiar = limpiar;
         vm.programas = [];
