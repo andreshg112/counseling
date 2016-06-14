@@ -24,8 +24,13 @@ class AsistenciasController extends Controller
             'temas_tutoriados'  => 'required|string',
             'fecha'  => 'required|date',
             ];
+            $messages = [
+            'required' => 'Se requiere el campo :attribute.',
+            'horario_id.unique_with' => 'Ya registraste tu asistencia a esta asesoría.',
+            ];
+            
             try {
-                $validator = \Validator::make($request->all(), $rules);
+                $validator = \Validator::make($request->all(), $rules, $messages);
                 if ($validator->fails()) {
                     $respuesta['result'] = false;
                     $respuesta['validator'] = $validator->errors()->all();
