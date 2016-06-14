@@ -25,7 +25,6 @@ class AsistenciasController extends Controller
             'fecha'  => 'required|date',
             ];
             $messages = [
-            'required' => 'Se requiere el campo :attribute.',
             'horario_id.unique_with' => 'Ya registraste tu asistencia a esta asesoría.',
             ];
             
