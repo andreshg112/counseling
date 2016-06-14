@@ -36,6 +36,7 @@
                 </ul>
                 <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'tutor'">
                     <li><a href="#/ver-calificaciones">Ver calificaciones</a></li>
+                    <li><a href="#/ver-asistencias">Ver asistencias</a></li>
                 </ul>
                 <ul class="nav navbar-nav" ng-if="index.getTipoUsuario() == 'alumno'">
                     <li><a href="#/buscar-horarios">Buscar horarios</a></li>
@@ -84,6 +85,7 @@
     <script src="app/compartido/tutores.service.js"></script>
     <script src="app/compartido/users.service.js"></script>
     <script src="app/compartido/programas.service.js"></script>
+    <script src="app/compartido/asistencias.service.js"></script>
     <script src="app/calificar-tutores/calificar-tutores.service.js"></script>
     <script src="app/index/index.controller.js"></script>
     <script src="app/materias/materias.controller.js"></script>
@@ -92,6 +94,7 @@
     <script src="app/visualizar-usuarios/visualizar-usuarios.controller.js"></script>
     <script src="app/calificar-tutores/calificar-tutores.controller.js"></script>
     <script src="app/ver-calificaciones/ver-calificaciones.controller.js"></script>
+    <script src="app/ver-asistencias/ver-asistencias.controller.js"></script>
 </body>
 
 </html>

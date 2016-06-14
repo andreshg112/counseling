@@ -24,5 +24,6 @@ Route::group(['middleware' => 'cors'], function() {
     Route::resource('programas', 'ProgramasController', ['only' => ['index']]);
     Route::get('tutores', 'UsersController@get_tutores');
     Route::get('tutores/{tutor_id}/calificaciones', 'CalificacionesController@get_by_tutor');
+    Route::get('tutores/{tutor_id}/asistencias', 'AsistenciasController@get_by_tutor');
     Route::resource('users', 'UsersController', ['only' => ['index', 'store']]);
 });

@@ -5,10 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Asistencia;
+use App\Models\Horario;
 use \stdClass;
 
 class AsistenciasController extends Controller
 {
+    
+    public function get_by_tutor($tutor_id)
+    {
+        $respuesta = [];
+        $horarios_tutor_id = Horario::select('id')->where('tutor_id', $tutor_id)->get();
+        $respuesta['result'] = Asistencia::with(['alumno', 'alumno.programa', 'horario', 'horario.materia'])->whereIn('horario_id', $horarios_tutor_id)->get();
+        if (count($respuesta['result']) == 0) {
+            $respuesta['result'] = false;
+            $respuesta['mensaje'] = "No hay registros.";
+        }
+        return $respuesta;
+    }
     
     public function store(Request $request, $horario_id)
     {

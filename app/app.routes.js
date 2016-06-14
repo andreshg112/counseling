@@ -39,6 +39,11 @@
                         controller: 'VerCalificacionesController',
                         controllerAs: 'vm'
                     })
+                    .when('/ver-asistencias', {
+                        templateUrl: 'app/ver-asistencias/ver-asistencias.html',
+                        controller: 'VerAsistenciasController',
+                        controllerAs: 'vm'
+                    })
                     .otherwise({
                         redirectTo: '/'
                     });
