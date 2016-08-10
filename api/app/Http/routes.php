@@ -26,4 +26,8 @@ Route::group(['middleware' => 'cors'], function() {
     Route::get('tutores/{tutor_id}/calificaciones', 'CalificacionesController@get_by_tutor');
     Route::get('tutores/{tutor_id}/asistencias', 'AsistenciasController@get_by_tutor');
     Route::resource('users', 'UsersController', ['only' => ['index', 'store']]);
+
+    //Pruebas
+    Route::post('cobrar', 'PruebasController@cobrarEnParqueadero');
+    
 });
