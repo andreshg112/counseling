@@ -30,11 +30,13 @@ class PruebasController extends Controller
                     $datos = $request->all();
                     $entrada = Carbon::parse($datos['entrada']);
                     $salida = Carbon::parse($datos['salida']);
-                    $id_vehiculo = $datos['id_vehiculo'];
-                    $valor = 0;
-                    $vehiculo = FactoryVehiculo::getVehiculo($id_vehiculo);
-                    $valor = $vehiculo->cobrar($entrada, $salida);
-                    $respuesta['result'] = $valor;
+                    if ($entrada->diffInMinutes($salida) < 3) {
+                        $respuesta['result'] = 0;
+                    } else {
+                        $id_vehiculo = $datos['id_vehiculo'];
+                        $vehiculo = FactoryVehiculo::getVehiculo($id_vehiculo);
+                        $respuesta['result'] = $vehiculo->cobrar($entrada, $salida);
+                    }
                 }
             } catch (Exception $e) {
                 $respuesta['result'] = false;
