@@ -97,33 +97,3 @@ function cobrarAutomovil($entrada, $salida)
     //echo $entrada->diffInMinutes($salida) . " dif<br>";
     return $valor;
 }
-/*
-//Cobrar llegada
-if ((7 * 60 + 10) <= $minutos_entrada && $minutos_entrada < (18 * 60 + 10)) {
-//Si llegó de día
-$valor += 2000;
-} else {
-//Si llegó de noche
-//$valor += 2500;
-}
-for ($i = 0; $i <= $dias_diferencia; $i++) {
-for ($j = $inicial + 1; $j < $minutos_dia; $j++) {
-$valor_noche = 0;
-if ((7 * 60 + 10) <= $j && $j < (18 * 60 + 10)) {
-//Si es de día
-if (($j - $minutos_entrada) % 60 == 0 && $valor < 12000) {
-$valor += 2000;
-}
-} else {
-if (($j - $minutos_entrada) % 60 == 0 && $valor_noche < 4000) {
-$valor_noche += 2000;
-}
-}
-if ($i == $dias_diferencia && $j == $ultimo) {
-break;
-}
-}
-$inicial = 0;
-$valor += $valor_noche;
-}
- */
