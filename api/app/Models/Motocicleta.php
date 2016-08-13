@@ -23,8 +23,12 @@ class Motocicleta implements iVehiculo
         $minutos_entrada = $entrada->hour * 60 + $entrada->minute;
         $inicial = $minutos_entrada;
         $valor = 0;
-        //Cobrar llegada
-        if ((7 * 60 + 10) <= $minutos_entrada && $minutos_entrada < (18 * 60 + 10)) {
+        if ($entrada->diffInHours($salida) < 4) {
+            //Si tarda menos de 4 horas.
+            $valor = 1400 + $this->cascos * 400;
+            return $valor;
+        }
+        if ((7 * 60) <= $minutos_entrada && $minutos_entrada < (23 * 60)) {
             $valor += 1400 + $this->cascos * 400;
         } else {
             $valor += 2500 + $this->cascos * 400;
@@ -32,10 +36,10 @@ class Motocicleta implements iVehiculo
         for ($i = 0; $i <= $dias_diferencia; $i++) {
             for ($j = $inicial + 1; $j < $minutos_dia; $j++) {
                 switch ($j) {
-                    case 7 * 60 + 10:
+                    case 7 * 60:
                         $valor += 1400 + $this->cascos * 400;
                         break;
-                    case 18 * 60 + 10:
+                    case 23 * 60:
                         $valor += 2500 + $this->cascos * 400;
                         break;
                 }
