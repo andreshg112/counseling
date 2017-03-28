@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::group(['middleware' => 'cors'], function() {
+Route::group(['middleware' => 'cors'], function () {
     Route::get('alumnos/{alumno_id}/tutores/calificacion', 'UsersController@get_tutores_con_calificacion_alumno');
     Route::resource('calificaciones', 'CalificacionesController', ['only' => ['store', 'update']]);
     Route::resource('horarios', 'HorariosController', ['except' => ['create', 'edit']]);
